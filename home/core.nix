@@ -1,15 +1,46 @@
 {pkgs, ...}: {
+ 
   home.packages = with pkgs; [
+    # CLI Tools
     aria2
+    atuin
     bat
+    duf
+    dust
     fastfetch
     fd
     fzf
     glow
+    htop
     jq
     ripgrep
-    tealdeer
+    rsync
+    tlrc
     yt-dlp
+    zellij
+    zoxide
+    
+    # Git
+    delta
+    gh
+    git
+    lazygit
+
+    # GUI
+    # anki-bin
+    # brave
+    ghostty-bin
+    mpv
+    # obsidian 		# Unfree
+    vesktop
+    # zotero
+
+    # MPD
+    mpc
+    mpd
+    # mpd-discord-rpc
+    mpdscribble
+    rmpc
   ];
 
   programs = {
@@ -35,16 +66,6 @@
           sort_dir_first = true;
         };
       };
-    };
-
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
-    zoxide = {
-      enable = true;
-      enableFishIntegration = true;
     };
   };
 }

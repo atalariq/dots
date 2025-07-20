@@ -15,15 +15,15 @@
   # But on macOS, it's less stable than homebrew.
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
-  environment.systemPackages = with pkgs; [
-    git
-    neovim
-    fastfetch
-    bat
-    eza
-    fd
-    ripgrep
-    fzf
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   git
+  #   neovim
+  #   fastfetch
+  #   bat
+  #   eza
+  #   fd
+  #   ripgrep
+  #   fzf
+  # ];
 
 }
