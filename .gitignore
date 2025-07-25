@@ -1,2 +1,4 @@
 result
-result/
+*.local
+*.private
+.DS_Store

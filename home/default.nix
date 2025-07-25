@@ -1,10 +1,12 @@
 { username, ... }:
-
 {
   # import sub modules
   imports = [
-    ./shell.nix
-    ./core.nix
+    ./shell
+    ./git.nix
+    ./packages.nix
+    ./neovim
+    ./mpd
   ];
 
   # Home Manager needs a bit of information about you and the

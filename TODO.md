@@ -11,8 +11,8 @@
   - [ ] Keyclu
 - [ ] Add more CLI Apps, e.g. `fastfetch`/`neofetch`, `htop`, `glow`, etc.
 - [ ] Write my own Neovim configuration
-- [ ] Configure shell config, `fish` + `fish-plugins` + `starship` + `zoxide` ...
-- [ ] Configure git
+- [x] Configure shell config, `fish` + `fish-plugins` + `starship` + `zoxide` ...
+- [x] Configure git
 - [ ] Setup Syncthing
 - [ ] Setup MPD (`mpd` + `mpc` + `rmpc` + scrobbler plugin)
 - [ ] Setup [agenix](https://github.com/ryantm/agenix) to store my credentials/secrets safely
