@@ -3,6 +3,7 @@
   # - https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only
   # - https://discourse.nixos.org/t/using-fish-interactively-with-zsh-as-the-default-shell-on-macos/48402
   programs.bash = {
+    enable = pkgs.stdenv.isLinux ;
     initExtra = ''
         if [[ $(ps --no-header --pid="$PPID" --format=comm) != "fish" && -z "$BASH_EXECUTION_STRING" && "$SHLVL" == 1 ]]
         then
@@ -13,8 +14,9 @@
   };
 
   programs.zsh = {
-    initExtra = ''
-        if [[ $(ps -o command= -p "$PPID" | awk '{print $1}') != 'fish' ]]
+    enable = pkgs.stdenv.isDarwin;
+    initContent = ''
+        if [[ $(ps -o command= -p "$PPID" | awk '{print $1}') != 'fish' ]];
         then
             exec fish -l
         fi
@@ -132,7 +134,7 @@
                 mkfile $file
                   end
                   end
-                  '';
+            '';
 
             take = ''
               function take --description "Create a directory and enter it."
@@ -140,7 +142,7 @@
               mkdir -p $folder
               cd $folder
               end
-              '';
+      '';
     };
 
     plugins = [
@@ -150,13 +152,4 @@
       { name = "fish-you-should-use"; src = pkgs.fishPlugins.fish-you-should-use; }
     ];
   };
-
-  programs.starship = {
-    enable = true;
-    enableTransience = true;
-    settings = {
-      add_newline = true;
-    };
-  };
-  programs.zoxide.enable = true;
 }

@@ -22,22 +22,46 @@
 
     defaults = {
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
+      hitoolbox.AppleFnUsageType = "Do Nothing"; # one of “Do Nothing”, “Change Input Source”, “Show Emoji & Symbols” (Default), “Start Dictation”
 
       # customize dock
       dock = {
         autohide = true;
-        show-recents = false;  # disable recent apps
+        autohide-delay = .3;
+        mineffect = "genie";
+        orientation = "bottom";
+        show-recents = false;
+        tilesize = 48;
+        persistent-apps = [
+          { spacer = { small = false; }; }
+          { app = "/Applications/iTerm.app"; }
+          { app = "/Applications/Brave Browser.app"; }
+          { app = "/Applications/Obsidian.app"; }
+          { spacer = { small = true; }; }
+          { app = "/Applications/Anki.appp"; }
+          { app = "/Applications/Zotero.app"; }
+          { app = "/Applications/Discord.app"; }
+          { app = "/Applications/WhatsApp.app"; }
+          { spacer = { small = false; }; }
+        ];
+        persistent-others = [
+          "~/Downloads/"
+          "~/Sync/"
+        ];
       };
 
       # customize finder
       finder = {
         _FXShowPosixPathInTitle = true;  # show full path in finder title
+        _FXSortFoldersFirst = true; # Keep folders on top when sorting by name
         AppleShowAllExtensions = true;  # show all file extensions
         FXEnableExtensionChangeWarning = false;  # disable warning when changing file extension
         QuitMenuItem = true;  # enable quit menu item
         ShowPathbar = true;  # show path bar
         ShowStatusBar = true;  # show status bar
       };
+
+      loginwindow.SHOWFULLNAME = false;
 
       # customize settings that not supported by nix-darwin directly
       # Incomplete list of macOS `defaults` commands :
