@@ -1,5 +1,36 @@
 {
-  # Fuzzy Finder (files, lsp, etc)
+  plugins.neo-tree.enable = true;
+  plugins.todo-comments.enable = true;
+
+  # =================================================== which-key – Key helper
+  plugins.which-key = {
+    enable = true;
+    settings = {
+      delay = 0;
+      spec = [
+        {
+          __unkeyed-1 = "<leader>s";
+          group = "[S]earch";
+        }
+        {
+          __unkeyed-1 = "<leader>t";
+          group = "[T]oggle";
+        }
+        {
+          __unkeyed-1 = "<leader>h";
+          group = "Git [H]unk";
+          mode = [
+            "n"
+            "v"
+            "o"
+            "x"
+          ];
+        }
+      ];
+    };
+  };
+
+  # ========================================================= Telescope
   # https://nix-community.github.io/nixvim/plugins/telescope/index.html
   plugins.telescope = {
     enable = true;
@@ -127,19 +158,13 @@
         desc = "[S]earch [/] in Open Files";
       };
     }
-    # Shortcut for searching your Neovim configuration files
+
+    # ===================================== Toggle Neo-tree
     {
-      mode = "n";
-      key = "<leader>sn";
-      action.__raw = ''
-        function()
-          require('telescope.builtin').find_files {
-            cwd = vim.fn.stdpath 'config'
-          }
-        end
-      '';
+      key = "`";
+      action = "<cmd>Neotree toggle<cr>";
       options = {
-        desc = "[S]earch [N]eovim files";
+        desc = "NeoTree Toggle";
       };
     }
   ];

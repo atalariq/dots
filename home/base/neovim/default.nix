@@ -1,43 +1,21 @@
-{ config, pkgs, lib, nixvim, ...}: 
-let
-  devMode = true; # Include files from dotfiles directly instead of via nix store
-  confDir = "${config.home.homeDirectory}/dots/home/neovim/config";
-  includeLuaFile =
-    path:
-    if devMode then
-      ''
-        -- lua dofile(vim.fn.expand("${confDir}/${path}"))
-        lua dofile("${confDir}/${path}")
-      ''
-    else
-      ''
-        lua << END
-        ${builtins.readFile ./config/${path}}
-        END
-      '';
-in
 {
-  # programs.neovim = {
-  #   enable = true;
-  #   defaultEditor = true;
-  #   vimAlias = true;
-  #   vimdiffAlias = true;
-  #   extraConfig = (
-  #     builtins.concatStringsSep "\n" ( [
-  #       (includeLuaFile "options.lua")
-  #       (includeLuaFile "keymaps.lua")
-  #       (includeLuaFile "autocmds.lua")
-  #     ])
-  #   );
-  # };
+  config,
+  pkgs,
+  lib,
+  nixvim,
+  stylix,
+  ...
+}: {
+  # Import nixvim module
+  imports = [nixvim.homeManagerModules.nixvim];
 
-  imports = [ nixvim.homeManagerModules.nixvim ];
-  # programs.nixvim = {
-  #     enable = true;
-  #     defaultEditor = true;
-  #     nixpkgs.useGlobalPackages = true;
-  #     viAlias = true;
-  #     vimAlias = true;
-  #   };
-  programs.nixvim = import ./nixvim.nix { inherit pkgs lib config; };
+  # stylix config
+  stylix.targets.nixvim.enable = false;
+  # stylix.targets.nixvim.plugin = "mini.base16"; # base16-nvim or mini.base16
+  # stylix.targets.nixvim.transparentBackground.main = true;
+  # stylix.targets.nixvim.transparentBackground.numberLine = true;
+  # stylix.targets.nixvim.transparentBackground.signColumn = true;
+
+  # nixvim configuration
+  programs.nixvim = import ./nixvim.nix {inherit pkgs lib config;};
 }

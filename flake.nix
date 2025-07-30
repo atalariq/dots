@@ -15,6 +15,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -24,6 +28,7 @@
       nixpkgs,
       home-manager,
       nixvim,
+      stylix,
     }:
     let
       username = "atalariq";
@@ -45,13 +50,12 @@
             ./modules/fonts.nix # Fonts
 
             # MacOS Specific
-            ./modules/macos/system.nix # Settings
-            ./modules/macos/host-user.nix # Host & User
-            # ./modules/macos/apps.nix                                  # Mac Apps
-            # ./modules/macos/homebrew.nix                              # Mac Apps
-            # TODO: WIP
-            # ./modules/macos/yabai.nix
-            # ./modules/macos/skhd.nix
+            ./modules/darwin/system.nix # Settings
+            ./modules/darwin/host-user.nix # Host & User
+            # ./modules/darwin/apps.nix # Mac Apps
+            # ./modules/darwin/homebrew.nix # Mac Apps
+            # ./modules/darwin/yabai.nix
+            # ./modules/darwin/skhd.nix
 
             # home-manager
             home-manager.darwinModules.home-manager

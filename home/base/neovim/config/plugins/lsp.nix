@@ -1,151 +1,136 @@
-{ pkgs, ... }:
+{ ... }:
 {
   # Useful status updates for LSP.
   # https://nix-community.github.io/nixvim/plugins/fidget/index.html
-  plugins.fidget = { enable = true; };
-
-  # A plugin that properly configures LuaLS for editing your Neovim config
-  #  by lazily updating your workspace libraries.
-  #  https://nix-community.github.io/nixvim/plugins/lazydev/index.html
-  plugins.lazydev = {
-    enable = true; # autoEnableSources not enough
-    settings = {
-      library = [
-        {
-          path = "\${3rd}/luv/library";
-          words = [ "vim%.uv" ];
-        }
-      ];
-    };
+  plugins.fidget = {
+    enable = true;
   };
 
   # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
-  autoGroups = { "lsp-attach" = { clear = true; };
+  autoGroups = {
+    "lsp-attach" = {
+      clear = true;
+    };
   };
 
-  plugins.lsp = {
-    enable = true;
+  lsp = {
+    inlayHints.enable = false;
+
     servers = {
-      # clangd = { enable = true; };
-      # rust_analyzer = { enable = true; };
-
-      # Nix lsp
-      nil_ls = { enable = true; };
-
-      # Lua lsp
-      lua_ls = {
-        enable = true;
+      "*" = {
         settings = {
-          completion = {
-            callSnippet = "Replace";
+          capabilities = {
+            textDocument = {
+              semanticTokens = {
+                multilineTokenSupport = true;
+              };
+            };
           };
+          root_markers = [
+            ".git"
+          ];
         };
+      };
+      just = {
+        enable = true;
       };
     };
 
-    keymaps = {
-      # Diagnostic keymaps
-      diagnostic = {
-        "<leader>q" = {
-          mode = "n";
-          action = "setloclist";
-          desc = "Open diagnostic [Q]uickfix list";
+    keymaps = [
+      # Find references for the word under your cursor.
+      {
+        mode = "n";
+        key = "grr";
+        action.__raw = "require('telescope.builtin').lsp_references";
+        options = {
+          desc = "LSP: [G]oto [R]eferences";
         };
-      };
+      }
+      # Jump to the implementation of the word under your cursor.
+      #  Useful when your language has ways of declaring types without an actual implementation.
+      {
+        mode = "n";
+        key = "gri";
+        action.__raw = "require('telescope.builtin').lsp_implementations";
+        options = {
+          desc = "LSP: [G]oto [I]mplementation";
+        };
+      }
+      # Jump to the definition of the word under your cursor.
+      #  This is where a variable was first declared, or where a function is defined, etc.
+      #  To jump back, press <C-t>.
+      {
+        mode = "n";
+        key = "grd";
+        action.__raw = "require('telescope.builtin').lsp_definitions";
+        options = {
+          desc = "LSP: [G]oto [D]efinition";
+        };
+      }
+      # Fuzzy find all the symbols in your current document.
+      #  Symbols are things like variables, functions, types, etc.
+      {
+        mode = "n";
+        key = "gO";
+        action.__raw = "require('telescope.builtin').lsp_document_symbols";
+        options = {
+          desc = "LSP: Open Document Symbols";
+        };
+      }
+      # Fuzzy find all the symbols in your current workspace.
+      #  Similar to document symbols, except searches over your entire project.
+      {
+        mode = "n";
+        key = "gW";
+        action.__raw = "require('telescope.builtin').lsp_dynamic_workspace_symbols";
+        options = {
+          desc = "LSP: Open Workspace Symbols";
+        };
+      }
+      # Jump to the type of the word under your cursor.
+      #  Useful when you're not sure what type a variable is and you want to see
+      #  the definition of its *type*, not where it was *defined*.
+      {
+        mode = "n";
+        key = "grt";
+        action.__raw = "require('telescope.builtin').lsp_type_definitions";
+        options = {
+          desc = "LSP: [G]oto [T]ype Definition";
+        };
+      }
 
-      extra = [
-        # Find references for the word under your cursor.
-        {
-          mode = "n";
-          key = "grr";
-          action.__raw = "require('telescope.builtin').lsp_references";
-          options = {
-            desc = "LSP: [G]oto [R]eferences";
-          };
-        }
-        # Jump to the implementation of the word under your cursor.
-        #  Useful when your language has ways of declaring types without an actual implementation.
-        {
-          mode = "n";
-          key = "gri";
-          action.__raw = "require('telescope.builtin').lsp_implementations";
-          options = {
-            desc = "LSP: [G]oto [I]mplementation";
-          };
-        }
-        # Jump to the definition of the word under your cursor.
-        #  This is where a variable was first declared, or where a function is defined, etc.
-        #  To jump back, press <C-t>.
-        {
-          mode = "n";
-          key = "grd";
-          action.__raw = "require('telescope.builtin').lsp_definitions";
-          options = {
-            desc = "LSP: [G]oto [D]efinition";
-          };
-        }
-        # Fuzzy find all the symbols in your current document.
-        #  Symbols are things like variables, functions, types, etc.
-        {
-          mode = "n";
-          key = "gO";
-          action.__raw = "require('telescope.builtin').lsp_document_symbols";
-          options = {
-            desc = "LSP: Open Document Symbols";
-          };
-        }
-        # Fuzzy find all the symbols in your current workspace.
-        #  Similar to document symbols, except searches over your entire project.
-        {
-          mode = "n";
-          key = "gW";
-          action.__raw = "require('telescope.builtin').lsp_dynamic_workspace_symbols";
-          options = {
-            desc = "LSP: Open Workspace Symbols";
-          };
-        }
-        # Jump to the type of the word under your cursor.
-        #  Useful when you're not sure what type a variable is and you want to see
-        #  the definition of its *type*, not where it was *defined*.
-        {
-          mode = "n";
-          key = "grt";
-          action.__raw = "require('telescope.builtin').lsp_type_definitions";
-          options = {
-            desc = "LSP: [G]oto [T]ype Definition";
-          };
-        }
-      ];
-
-      lspBuf = {
-        # Rename the variable under your cursor.
-        #  Most Language Servers support renaming across files, etc.
-        "grn" = {
-          action = "rename";
+      # Rename the variable under your cursor.
+      #  Most Language Servers support renaming across files, etc.
+      {
+        key = "grn";
+        action.__raw = "vim.lsp.buf.rename";
+        options = {
           desc = "LSP: [R]e[n]ame";
         };
-        # Execute a code action, usually your cursor needs to be on top of an error
-        # or a suggestion from your LSP for this to activate.
-        "gra" = {
-          mode = [
-            "n"
-            "x"
-          ];
-          action = "code_action";
+      }
+      # Execute a code action, usually your cursor needs to be on top of an error
+      # or a suggestion from your LSP for this to activate.
+      {
+        key = "gra";
+        mode = [
+          "n"
+          "x"
+        ];
+        action.__raw = "vim.lsp.buf.code_action";
+        options = {
           desc = "LSP: [G]oto Code [A]ction";
         };
-        # This is not Goto Definition, this is Goto Declaration.
-        #  For example, in C this would take you to the header.
-        "grD" = {
-          action = "declaration";
+      }
+      # This is not Goto Definition, this is Goto Declaration.
+      #  For example, in C this would take you to the header.
+      {
+        key = "grD";
+        action.__raw = "vim.lsp.buf.declaration";
+        options = {
           desc = "LSP: [G]oto [D]eclaration";
         };
-      };
-    };
-
-    capabilities = ''
-     require('blink.cmp').get_lsp_capabilities()
-    '';
+      }
+    ];
 
     onAttach = ''
       -- NOTE: Remember that Lua is a real programming language, and as such it is possible

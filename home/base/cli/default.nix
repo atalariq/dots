@@ -34,5 +34,8 @@ in {
     zellij
     zoxide
     
+    # media
+    ffmpeg
+    imagemagick
   ];
 }

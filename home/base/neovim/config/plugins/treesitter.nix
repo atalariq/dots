@@ -1,62 +1,89 @@
 { pkgs, ... }:
 {
+  plugins.ts-autotag.enable = true;
+  plugins.ts-comments.enable = true;
+  plugins.ts-context-commentstring.enable = true;
+  plugins.treesitter-context.enable = true;
+
+  # ================================= Treesitter ==============================
   # Highlight, edit, and navigate code
   # https://nix-community.github.io/nixvim/plugins/treesitter/index.html
   plugins.treesitter = {
     enable = true;
-
-    # Installing tree-sitter grammars from Nixpkgs (recommended)
-    # grammarPackages = pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars;
     grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-      astro
+      # programming/scripting language
       bash
+      c
+      cpp
+      fish
+      java
+      lua
+      nix
+      python
+      rust
+
+      # Web
+      astro
       css
-      csv
-      diff
-      editorconfig
+      html
+      http
+      javascript
+      typescript
+
+      # markup language
+      toml
+      xml
+      yaml
+
+      # git
       git_config
       git_rebase
       gitattributes
       gitcommit
       gitignore
-      html
-      http
+
+      # config file
+      editorconfig
       ini
-      javascript
+      ssh_config
+      vim
+
+      # others
+      csv
+      diff
+      jq
+      jsdoc
       json
-      lua
+      jsonc
+      just
       luadoc
+      luap
       markdown
       markdown_inline
-      nix
+      printf
       query
       regex
-      rust
-      ssh_config
-      toml
-      tsx
-      typescript
-      vim
+      typst
       vimdoc
-      xml
-      yaml
     ];
 
     settings = {
-      # Installing tree-sitter grammars from nvim-treesitter
-      # (can be combined with grammarPackages from Nixpkgs)
-      # https://nix-community.github.io/nixvim/plugins/treesitter/index.html#installing-tree-sitter-grammars-from-nvim-treesitter
-      ensureInstalled = [ ];
-
-      highlight = { enable = true; };
-      indent = { enable = true; };
-
-      # There are additional nvim-treesitter modules that you can use to interact
-      # with nvim-treesitter. You should go explore a few and see what interests you:
-      #
-      #    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-      #    - Show your current context: https://nix-community.github.io/nixvim/plugins/treesitter-context/index.html
-      #    - Treesitter + textobjects: https://nix-community.github.io/nixvim/plugins/treesitter-textobjects/index.html
+      highlight = {
+        enable = true;
+      };
+      indent = {
+        enable = true;
+      };
+      incremental_selection = {
+        enable = true;
+        keymaps = {
+          init_selection = "<C-space>";
+          node_incremental = "<C-space>";
+          scope_incremental = false;
+          node_decremental = "<bs>";
+        };
+      };
     };
   };
+
 }
