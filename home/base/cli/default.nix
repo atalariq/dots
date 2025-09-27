@@ -21,14 +21,19 @@ in {
     # CLI Tools
     aria2
     bat
+    dasel
+    duf
+    dust
     fastfetch
     fd
+    fx
     fzf
     glow
     htop
     jq
     ripgrep
     rsync
+    silicon
     tlrc
     yt-dlp
     zellij

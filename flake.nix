@@ -11,14 +11,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -27,8 +19,6 @@
       darwin,
       nixpkgs,
       home-manager,
-      nixvim,
-      stylix,
     }:
     let
       username = "atalariq";
@@ -49,17 +39,25 @@
             ./modules/nix-core.nix # Nix Settings
             ./modules/fonts.nix # Fonts
 
+            # Apps/Software
+            ./modules/apps.nix # General Apps
+            ./modules/development.nix # For Development
+            # ./modules/hacking.nix # For Hacking
+
             # MacOS Specific
             ./modules/darwin/system.nix # Settings
             ./modules/darwin/host-user.nix # Host & User
-            # ./modules/darwin/apps.nix # Mac Apps
+            ./modules/darwin/apps.nix # Mac Apps
             # ./modules/darwin/homebrew.nix # Mac Apps
-            # ./modules/darwin/yabai.nix
-            # ./modules/darwin/skhd.nix
+            ./modules/darwin/ricing/yabai.nix
+            ./modules/darwin/ricing/skhd.nix
+            # ./modules/darwin/ricing/sketchybar.nix
+            ./modules/darwin/ricing/jankyborders.nix
 
             # home-manager
             home-manager.darwinModules.home-manager
             {
+              nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = specialArgs;

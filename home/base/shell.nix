@@ -117,31 +117,27 @@
       gitignore = "curl -sL https://www.gitignore.io/api/$argv";
 
       ad = ''
-        function ad --description "Advanced file, better make new file"
-        function mkfile
+      function mkfile
         set file $argv[1]
         switch $file
-      case "*/"
-          mkdir -p $file
-      case "*"
+          case "*/"
+            mkdir -p $file
+          case "*"
             mkdir -p (dirname "$file")
-              touch $file
-              ;;
-            end
-              end
+            touch $file
+        ;;
+        end
+      end
 
-              for file in $argv
-                mkfile $file
-                  end
-                  end
-            '';
+      for file in $argv
+        mkfile $file
+      end
+      '';
 
-            take = ''
-              function take --description "Create a directory and enter it."
-              set folder $argv[1]
-              mkdir -p $folder
-              cd $folder
-              end
+      take = ''
+        set folder $argv[1]
+        mkdir -p $folder
+        cd $folder
       '';
     };
 

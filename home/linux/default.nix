@@ -13,4 +13,5 @@
 
   # enable management of XDG base directories on Linux.
   xdg.enable = true;
+  xdg.userDirs.enable = true;
 }

@@ -1,18 +1,13 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    anki-bin # SRS
-    brave # browser
+    alt-tab-macos
+    # ice-bar
     iina # media player
-    obsidian # note-taking
-    raycast # system finder, alternative to spotlight
-    shottr # screenshot tools
-    zotero # references manager
     iterm2 # terminal emulator
-    ghostty-bin # terminal emulator
-
-    # messaging
+    keycastr
+    # raycast # system finder, alternative to spotlight
+    shottr
     whatsapp-for-mac
-    vesktop # discord alternative
   ];
 }

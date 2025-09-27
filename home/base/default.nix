@@ -1,13 +1,11 @@
-{ stylix, ... }:
+{ ... }:
 {
   # import sub modules
   imports = [
-    stylix.homeModules.stylix
-    ./stylix.nix
-    ./shell.nix
     ./cli
-    ./mpd
+    ./mpd.nix
     ./neovim
+    ./shell.nix
   ];
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
