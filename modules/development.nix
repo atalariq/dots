@@ -5,7 +5,7 @@
     # --- CORE TOOLS ---
     # neovim       # Managed with NixVim (see ../home/base/neovim/default.nix)
     age          # Alat enkripsi file yang sederhana dan modern.
-    firefox-bin  # For DevTools, and hacking purpose (Zap)
+    # firefox-bin  # For DevTools, and hacking purpose (Zap)
     git          # Sistem kontrol versi yang esensial.
     gh
     httpie
@@ -24,8 +24,8 @@
     clang-tools  # Termasuk clangd, Language Server yang sangat baik untuk C++.
     # cmake        # Build system generator lintas platform.
     fnm          # Node Package manager
-    gdb          # GNU Debugger.
-    gef
+    # gdb          # GNU Debugger.
+    # gef
     rustup       # Rust toolchain installer. Ini akan mengelola rustc, cargo, clippy, dll.
     uv           # Python project and package manager
     # vfox         # Extendable version manager

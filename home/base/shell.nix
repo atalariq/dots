@@ -140,12 +140,5 @@
         cd $folder
       '';
     };
-
-    plugins = [
-      { name = "autopair"; src = pkgs.fishPlugins.autopair; }
-      { name = "done"; src = pkgs.fishPlugins.done; }
-      { name = "sponge"; src = pkgs.fishPlugins.sponge; }
-      { name = "fish-you-should-use"; src = pkgs.fishPlugins.fish-you-should-use; }
-    ];
   };
 }

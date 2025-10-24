@@ -1,9 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # import sub modules
   imports = [
     ./cli
-    ./mpd.nix
+    # (if pkgs.stdenv.isLinux then ./mpd.nix else {})
     ./neovim
     ./shell.nix
   ];

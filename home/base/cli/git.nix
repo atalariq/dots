@@ -6,7 +6,7 @@
 
   programs.git = {
     enable = true;
-    delta.enable = true;
+  delta.enable = true;
     userName = "Atalariq Barra Hadinugraha";
     userEmail = "atalariq.dev@outlook.com";
     aliases = {
@@ -35,7 +35,7 @@
       ".vs"
       ".vsc"
       ".vscode"
-        # npm
+      # npm
       "node_modules"
       "npm-debug.log"
       # python

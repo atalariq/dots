@@ -2,13 +2,21 @@
   description = "Atalariq's Darwin/MacOS System Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # darwin = {
+    #   url = "github:nix-darwin/nix-darwin";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     darwin = {
-      url = "github:nix-darwin/nix-darwin";
+      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,6 +26,7 @@
       self,
       darwin,
       nixpkgs,
+      determinate,
       home-manager,
     }:
     let
@@ -36,6 +45,7 @@
           system = "x86_64-darwin";
           modules = [
             # OS Agnostic
+            inputs.determinate.darwinModules.default
             ./modules/nix-core.nix # Nix Settings
             ./modules/fonts.nix # Fonts
 

@@ -6,9 +6,14 @@
     yams      # Last.fm scrobbler
   ];
 
-  services.mpd.enable = true;
-  services.mpd.musicDirectory = "$HOME/Music";
+  services.mpd = {
+    enable = true;
+    musicDirectory = "$HOME/Music";
+    package = pkgs.mpd-small;
+  };
+
   # services.mpd-mpris.enable = true;
   # services.mpdris2.enable = true;
+  # services.mpd-discord-rpc.enable = true;
 }
 

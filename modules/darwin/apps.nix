@@ -5,9 +5,9 @@
     # ice-bar
     iina # media player
     iterm2 # terminal emulator
-    keycastr
+    # keycastr
     # raycast # system finder, alternative to spotlight
     shottr
-    whatsapp-for-mac
+    # whatsapp-for-mac
   ];
 }

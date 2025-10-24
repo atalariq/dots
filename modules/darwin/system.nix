@@ -107,7 +107,7 @@
         AppleInterfaceStyle = "Dark"; # use dark mode
         AppleInterfaceStyleSwitchesAutomatically = true; # automatically switch between light and dark mode
         AppleMeasurementUnits = "Centimeters";
-        AppleKeyboardUIMode = 0;
+        AppleKeyboardUIMode = 3;
         AppleMetricUnits = 1;
         ApplePressAndHoldEnabled = true;
         AppleScrollerPagingBehavior = true;
