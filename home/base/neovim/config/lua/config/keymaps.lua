@@ -88,18 +88,3 @@ nnoremap("<A-BS>", "i<C-w>")
 cnoremap("<A-BS>", "<C-w>")
 
 -- }}}
-
--- Neotree
-nnoremap("`", "<Cmd>Neotree dir=./ toggle left<CR>", { desc = "Toggle Neotree" })
-
--- Bufferline
-local map = vim.api.nvim_set_keymap
-for i = 1, 9 do
-  map("n", ("<A-%s>"):format(i), ("<Cmd>BufferLineGoToBuffer %s<CR>"):format(i), { silent = true, noremap = true })
-  map(
-    "n",
-    ("<A-S-%s>"):format(i),
-    ('<Cmd>lua require("bufferline").move_to(%s)<CR>'):format(i),
-    { silent = true, noremap = true }
-  )
-end
