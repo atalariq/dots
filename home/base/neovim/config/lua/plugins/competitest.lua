@@ -73,7 +73,6 @@ return {
         height = 0.6,
         show_nu = true,
         show_rnu = false,
-        close_mappings = { "q", "Q" },
       },
     },
     popup_ui = {

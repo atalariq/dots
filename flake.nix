@@ -2,18 +2,11 @@
   description = "Atalariq's Darwin/MacOS System Flake";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # darwin = {
-    #   url = "github:nix-darwin/nix-darwin";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     darwin = {
-      url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -26,7 +19,6 @@
       self,
       darwin,
       nixpkgs,
-      determinate,
       home-manager,
     }:
     let
@@ -45,24 +37,17 @@
           system = "x86_64-darwin";
           modules = [
             # OS Agnostic
-            inputs.determinate.darwinModules.default
             ./modules/nix-core.nix # Nix Settings
             ./modules/fonts.nix # Fonts
 
             # Apps/Software
-            ./modules/apps.nix # General Apps
+            # ./modules/apps.nix # General Apps
             ./modules/development.nix # For Development
             # ./modules/hacking.nix # For Hacking
 
             # MacOS Specific
             ./modules/darwin/system.nix # Settings
             ./modules/darwin/host-user.nix # Host & User
-            ./modules/darwin/apps.nix # Mac Apps
-            # ./modules/darwin/homebrew.nix # Mac Apps
-            ./modules/darwin/ricing/yabai.nix
-            ./modules/darwin/ricing/skhd.nix
-            # ./modules/darwin/ricing/sketchybar.nix
-            ./modules/darwin/ricing/jankyborders.nix
 
             # home-manager
             home-manager.darwinModules.home-manager

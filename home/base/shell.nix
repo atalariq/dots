@@ -25,6 +25,15 @@
 
   home.shell.enableFishIntegration = true;
 
+  programs.starship = {
+    enable = true;
+    enableTransience = true;
+    settings = {
+      add_newline = true;
+    };
+  };
+  programs.zoxide.enable = true;
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -42,10 +51,8 @@
       # git
       g = "git";
       ga   = "git add";
-      gaa  = "git add -A";
       gb   = "git branch";
       gbd  = "git branch --delete";
-      gc   = "git commit";
       gcl  = "git clone --depth 1";
       gcm  = "git commit -m";
       gco  = "git checkout";
@@ -55,8 +62,6 @@
       gp   = "git push";
       gpom = "git push origin main";
       gs   = "git status";
-      gst  = "git stash";
-      gstp =  "git stash pop";
       lg = "lazygit";
 
       # eza >>> ls
@@ -64,20 +69,16 @@
       lla = "eza --icons --group-directories-first -algh";
       ls = "eza --icons --group-directories-first";
       lsa = "eza --icons --group-directories-first -a";
-      lt = "eza --icons --group-directories-first -T";
       tree = "eza --icons --group-directories-first -T";
 
       # trash >>> `rm`
-      tr = "gio trash";
       rm = "gio trash";
       rm-empty-files = "find . -type f -empty -print -delete";
       rm-empty-folders = "find . -type d -empty -print -delete";
       rmm = "rm -rfv";
 
-      # yazi
       fm = "yazi";
-      fmm = "yy";
-    } 
+    }
       # yt-dlp
     // (let
         dl = "yt-dlp";
@@ -94,17 +95,7 @@
        });
 
     shellAliases = {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../../";
-      "....." = "cd ../../../../";
-
-      "cdd" = "cd ~/dots";
-      "cdr" = "cd ~/Repos";
-      "cdn" = "cd ~/Sync/Notes";
-
       "cp" = "cp -v";
-      "ddf" = "df -h";
       "mkdir" = "mkdir -p";
       "mv" = "mv -v";
     };
@@ -113,32 +104,6 @@
         body = "__fish_default_command_not_found_handler $argv[1]";
         onEvent = "fish_command_not_found";
       };
-
-      gitignore = "curl -sL https://www.gitignore.io/api/$argv";
-
-      ad = ''
-      function mkfile
-        set file $argv[1]
-        switch $file
-          case "*/"
-            mkdir -p $file
-          case "*"
-            mkdir -p (dirname "$file")
-            touch $file
-        ;;
-        end
-      end
-
-      for file in $argv
-        mkfile $file
-      end
-      '';
-
-      take = ''
-        set folder $argv[1]
-        mkdir -p $folder
-        cd $folder
-      '';
     };
   };
 }

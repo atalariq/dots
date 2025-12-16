@@ -33,8 +33,11 @@ return {
             '"$dir/bin/$fileNameWithoutExt"',
           },
           dart = {
-            'dart run "$fileName"'
-          }
+            'dart run "$fileName"',
+          },
+          py = {
+            'python "$fileName"',
+          },
         },
       })
     end,

@@ -19,11 +19,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spelllang = { "id", "en" }
   end,
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("nowrap"),
-  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = false
-  end,
-})

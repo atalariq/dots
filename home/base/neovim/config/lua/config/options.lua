@@ -11,6 +11,8 @@ vim.g.editorconfig = true
 vim.g.markdown_recommended_style = 0
 vim.g.trouble_lualine = true
 
+vim.lsp.inlay_hint.enable(false)
+
 local opt = vim.opt
 
 opt.autochdir = true
@@ -20,14 +22,14 @@ opt.autowrite = true -- Enable auto write
 opt.backup = false
 opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
+opt.conceallevel = 0 -- Don't Hide * markup
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
 opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " }
 opt.foldlevel = 99
 opt.foldmethod = "indent"
-opt.foldtext = ""
+-- opt.foldtext = ""
 opt.formatexpr = "v:lua.LazyVim.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
